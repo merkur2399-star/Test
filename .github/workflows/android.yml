@@ -7,11 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-      # Bu satýr, Gradle'ýn sizin bilgisayarýnýzdaki yanlýþ Java yolunu kullanmasýný engeller:
-      ORG_GRADLE_JAVA_HOME: "" 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Remove local gradle properties
+        run: rm -f gradle.properties
 
       - name: Set up JDK 8
         uses: actions/setup-java@v4
