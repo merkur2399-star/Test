@@ -10,8 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Remove local gradle properties
-        run: rm -f gradle.properties
+      - name: Create gradle.properties
+        run: |
+          echo "android.useAndroidX=true" > gradle.properties
+          echo "android.enableJetifier=true" >> gradle.properties
 
       - name: Set up JDK 8
         uses: actions/setup-java@v4
