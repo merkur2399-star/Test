@@ -1,0 +1,16 @@
+# Gradle ve Build klasörleri
+.gradle/
+build/
+/build
+/captures
+
+# Idea yapýlandýrmalarý
+.idea/
+*.iml
+*.iws
+local.properties
+
+# Diðerleri
+.DS_Store
+.externalNativeBuild
+.cxx
