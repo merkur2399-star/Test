@@ -12,10 +12,12 @@
 
         <Button
             android:id="@+id/btn_select"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_gravity="left"
+            android:layout_marginBottom="-10dp"
             android:text="Müzik veya Video Seç" />
+
 
         <FrameLayout
             android:id="@+id/videoContainer"
