@@ -6,28 +6,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # 1. Senin dosyalarýný GitHub sunucusuna çek
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 2. GitHub kendi içinde JDK 17'yi indirip kurar
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      # 3. GitHub kendi içinde Gradle 8.7'yi indirip kurar
-      - name: Install Gradle 8.7
-        run: |
-          ./gradlew wrapper --gradle-version 8.7
-          chmod +x gradlew
+      # HATA BURADA ÇÖZÜLÜYOR: Wrapper komutundan ÖNCE izin veriyoruz
+      - name: Grant Permission for gradlew
+        run: chmod +x ./gradlew
 
-      # 4. GitHub kendi içinde build iþlemini gerçekleþtirir
+      - name: Force Gradle Update to 8.7
+        run: ./gradlew wrapper --gradle-version 8.7
+
       - name: Build with Gradle
         run: ./gradlew assembleDebug
 
-      # 5. Sonuç dosyasýný (APK) sana sunar
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
