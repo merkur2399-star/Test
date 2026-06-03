@@ -18,8 +18,6 @@ jobs:
       - name: Grant Permission
         run: chmod +x ./gradlew
 
-      # ÇÖZÜM: Dosyayý wrapper komutuyla deðil, doðrudan echo ile yazarak güncelliyoruz.
-      # Bu sayede eski Gradle 5.6.4 hiç çaðrýlmayacak.
       - name: Force Gradle 8.7 Configuration
         run: |
           mkdir -p gradle/wrapper
@@ -30,7 +28,8 @@ jobs:
           echo "zipStorePath=wrapper/dists" >> gradle/wrapper/gradle-wrapper.properties
 
       - name: Build with Gradle
-        run: ./gradlew assembleDebug --no-daemon
+        # Hatanýn kök nedenini görmek için --stacktrace ekledim
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
