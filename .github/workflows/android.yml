@@ -5,34 +5,32 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: Create gradle.properties
-        run: |
-          echo "android.useAndroidX=true" > gradle.properties
-          echo "android.enableJetifier=true" >> gradle.properties
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Set up JDK 8
+      # 1. Java 17 Kurulumu
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '8'
+          java-version: '17'
           distribution: 'temurin'
 
+      # 2. Gradlew yetkilendirme
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Build Projects
-        run: |
-          ./gradlew assembleDebug
-          ./gradlew bundleDebug
+      # 3. Gradle Sürümünü 8.7'ye yükselt
+      - name: Force Gradle Update
+        run: ./gradlew wrapper --gradle-version 8.7
 
-      - name: Upload Artifacts
+      # 4. Build komutu (API 35 parametreleri ile)
+      - name: Build with Gradle
+        run: ./gradlew assembleDebug -Pandroid.compileSdkVersion=35 -Pandroid.targetSdkVersion=35
+
+      # 5. APK'yý çýktý olarak al
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: app-artifacts
-          path: |
-            app/build/outputs/apk/debug/app-debug.apk
-            app/build/outputs/bundle/debug/app-debug.aab
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk

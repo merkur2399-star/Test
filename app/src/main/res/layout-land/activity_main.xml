@@ -4,55 +4,48 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="#E1F5FE">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="1dp">
+        android:padding="16dp">
 
         <Button
             android:id="@+id/btn_select"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-10dp"
+            android:layout_marginBottom="16dp"
             android:text="Müzik veya Video Seç" />
 
         <FrameLayout
             android:id="@+id/videoContainer"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_marginTop="3dp"
-            android:layout_height="300dp">
+            android:layout_width="680dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="-20dp">
 
             <SurfaceView
                 android:id="@+id/surfaceView"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="0dp" />
-        </FrameLayout>
+                android:layout_width="690dp"
+                android:layout_height="270dp"/>
 
+
+        </FrameLayout>
 
         <SeekBar
             android:id="@+id/videoSeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-3dp" />
+            android:layout_marginTop="-20dp" />
+
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="-1dp"
+            android:layout_marginTop="-5dp"
             android:text="00:00 / 00:00" />
 
 
-        <Button
-            android:id="@+id/btn_record"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ses Kaydını Başlat"
-              android:layout_marginTop="70dp"/>
 
     </LinearLayout>
 </ScrollView>

@@ -14,3 +14,9 @@ local.properties
 .DS_Store
 .externalNativeBuild
 .cxx
+
+# Keystore ve imzalama dosyalarý
+*.jks
+*.keystore
+key.properties
+signing.properties
