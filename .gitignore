@@ -19,4 +19,5 @@ local.properties
 *.jks
 *.keystore
 key.properties
-signing.properties
+signing.propertiestemp.txt
+temp.txt
