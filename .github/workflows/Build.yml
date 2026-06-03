@@ -18,18 +18,13 @@ jobs:
       - name: Grant Permission
         run: chmod +x ./gradlew
 
-      - name: Force Gradle 8.7 Configuration
-        run: |
-          mkdir -p gradle/wrapper
-          echo "distributionBase=GRADLE_USER_HOME" > gradle/wrapper/gradle-wrapper.properties
-          echo "distributionPath=wrapper/dists" >> gradle/wrapper/gradle-wrapper.properties
-          echo "distributionUrl=https\://services.gradle.org/distributions/gradle-8.7-bin.zip" >> gradle/wrapper/gradle-wrapper.properties
-          echo "zipStoreBase=GRADLE_USER_HOME" >> gradle/wrapper/gradle-wrapper.properties
-          echo "zipStorePath=wrapper/dists" >> gradle/wrapper/gradle-wrapper.properties
-
+      # Gradle 5.6.4, Java 17 ile çalýþýrken 'vmplugin.v7.Java7' hatasý verir.
+      # Bunu aþmak için Gradle'a "ben aslýnda Java 8 kullanýyorum" yalanýný söylüyoruz.
       - name: Build with Gradle
-        # Hatanýn kök nedenini görmek için --stacktrace ekledim
-        run: ./gradlew assembleDebug --no-daemon --stacktrace
+        run: ./gradlew assembleDebug --no-daemon
+        env:
+          JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
+          GRADLE_OPTS: "-Dorg.gradle.java.home=${{ env.JAVA_HOME_17_X64 }} -Dorg.gradle.jvmargs='-Djava.version=8'"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
