@@ -18,11 +18,12 @@ jobs:
       - name: Grant Permission
         run: chmod +x ./gradlew
 
-      # Çözüm: Wrapper sürümünü güncelle ve --no-daemon ekle
-      - name: Update Gradle Wrapper
-        run: ./gradlew wrapper --gradle-version 8.7 --no-daemon
+      # ÇÖZÜM: Eski wrapper ayarlarýný devre dýþý býrakýp 8.7 ile sýfýrdan kur
+      - name: Force Gradle 8.7 Update
+        run: |
+          rm -rf gradle/wrapper/gradle-wrapper.properties
+          ./gradlew wrapper --gradle-version 8.7 --distribution-type all
 
-      # Build iþlemini yeni wrapper ile yap
       - name: Build with Gradle
         run: ./gradlew assembleDebug --no-daemon
 
