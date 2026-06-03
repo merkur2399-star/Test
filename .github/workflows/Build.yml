@@ -18,11 +18,9 @@ jobs:
       - name: Grant Permission
         run: chmod +x ./gradlew
 
-      # ÇÖZÜM: Eski wrapper ayarlarýný devre dýþý býrakýp 8.7 ile sýfýrdan kur
+      # ÇÖZÜM: Dosyayý silmiyoruz, doðrudan 8.7 sürümüne güncelliyoruz
       - name: Force Gradle 8.7 Update
-        run: |
-          rm -rf gradle/wrapper/gradle-wrapper.properties
-          ./gradlew wrapper --gradle-version 8.7 --distribution-type all
+        run: ./gradlew wrapper --gradle-version 8.7 --distribution-type all
 
       - name: Build with Gradle
         run: ./gradlew assembleDebug --no-daemon
