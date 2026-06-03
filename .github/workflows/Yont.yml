@@ -19,17 +19,15 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Decode Keystore
-        # Dosyayý build'in beklediði yere (app klasörüne) oluþturuyoruz
-        run: echo "${{ secrets.SIGNING_KEY }}" | base64 --decode > app/keystore.jks
+        run: echo "${{ secrets.SIGNING_KEY }}" | base64 -d > app/kayitcalarkey.jks
 
       - name: Build Signed Release APK
         run: ./gradlew assembleRelease
         env:
-          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          # Buradaki yolun build.gradle'daki yapýlandýrmanýzla eþleþtiðinden emin olun
-          STORE_FILE: keystore.jks
+          STORE_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          STORE_FILE: kayitcalarkey.jks
 
       - name: Upload Signed APK
         uses: actions/upload-artifact@v4
