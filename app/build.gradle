@@ -3,14 +3,17 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 34
 
-    signingConfigs {
-        release {
-            storeFile file('kayitcalarkey.jks')
-            storePassword System.getenv("STORE_PASSWORD")
-            keyAlias System.getenv("KEY_ALIAS")
-            keyPassword System.getenv("KEY_PASSWORD")
-        }
+   signingConfigs {
+    release {
+        storeFile file('kayitcalarkey.jks')
+        storePassword 'K239932k' // Çok basit bir þifre kullan
+        keyAlias 'kayitcalar'        // Android Studio'nun varsayýlaný
+        keyPassword 'K239932k'
     }
+}
+   
+
+ }
 
     defaultConfig {
         applicationId "com.mesutarslan.kayitcalar"
